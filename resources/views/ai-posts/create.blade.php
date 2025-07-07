@@ -169,36 +169,36 @@
             <!-- Sidebar -->
             <div class="lg:col-span-1 space-y-6">
                 <!-- Tips Card -->
-                <div class="card">
+                <div class="card card-elevated">
                     <div class="card-header">
-                        <h3 class="text-lg font-semibold text-slate-900 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-warning-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                             </svg>
-                            Writing Tips
-                        </h3>
+                            <h3 class="font-semibold text-neutral-900">Writing Tips</h3>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <div class="space-y-4 text-sm">
+                        <div class="space-y-4">
                             <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-emerald-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div class="w-2 h-2 bg-gradient-to-r from-brand-400 to-brand-600 rounded-full mt-1.5 flex-shrink-0"></div>
                                 <div>
-                                    <p class="font-medium text-slate-900">Be specific</p>
-                                    <p class="text-slate-600">Include details, names, places, and emotions</p>
+                                    <p class="text-sm font-medium text-neutral-800">Be specific</p>
+                                    <p class="text-xs text-neutral-600 mt-0.5">Include details, names, places, and emotions</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div class="w-2 h-2 bg-gradient-to-r from-success-400 to-success-600 rounded-full mt-1.5 flex-shrink-0"></div>
                                 <div>
-                                    <p class="font-medium text-slate-900">Add context</p>
-                                    <p class="text-slate-600">Explain why this topic matters to you</p>
+                                    <p class="text-sm font-medium text-neutral-800">Add context</p>
+                                    <p class="text-xs text-neutral-600 mt-0.5">Explain why this topic matters to you</p>
                                 </div>
                             </div>
                             <div class="flex items-start space-x-3">
-                                <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                <div class="w-2 h-2 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full mt-1.5 flex-shrink-0"></div>
                                 <div>
-                                    <p class="font-medium text-slate-900">Include questions</p>
-                                    <p class="text-slate-600">Engage your audience with thought-provoking questions</p>
+                                    <p class="text-sm font-medium text-neutral-800">Include questions</p>
+                                    <p class="text-xs text-neutral-600 mt-0.5">Engage your audience with thought-provoking questions</p>
                                 </div>
                             </div>
                         </div>
