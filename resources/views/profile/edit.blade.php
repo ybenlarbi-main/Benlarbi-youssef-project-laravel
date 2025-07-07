@@ -1,29 +1,43 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
+    <x-reddit-layout>
+        <div class="space-y-6">
+            <!-- Profile Settings Header -->
+            <div class="reddit-card">
+                <div class="p-6">
+                    <h1 class="text-2xl font-bold text-neutral-900 mb-2">Profile Settings</h1>
+                    <p class="text-neutral-600">Manage your account settings and preferences.</p>
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+            <!-- Update Profile Information -->
+            <div class="reddit-card">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-neutral-900 mb-4">Profile Information</h2>
+                    <div class="max-w-xl">
+                        @include('profile.partials.update-profile-information-form')
+                    </div>
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+            <!-- Update Password -->
+            <div class="reddit-card">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-neutral-900 mb-4">Update Password</h2>
+                    <div class="max-w-xl">
+                        @include('profile.partials.update-password-form')
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delete Account -->
+            <div class="reddit-card">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-red-600 mb-4">Delete Account</h2>
+                    <div class="max-w-xl">
+                        @include('profile.partials.delete-user-form')
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </x-reddit-layout>
 </x-app-layout>
