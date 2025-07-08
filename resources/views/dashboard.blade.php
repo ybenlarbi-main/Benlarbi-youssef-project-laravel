@@ -11,11 +11,11 @@
                     <a href="{{ route('posts.create') }}" class="flex-1 form-input bg-neutral-50 hover:bg-neutral-100 transition-colors rounded-full px-4 py-2 text-neutral-500 text-sm cursor-pointer">
                         What's on your mind?
                     </a>
-                    <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-lg transition-colors">
+                    {{-- <button class="p-2 text-neutral-500 hover:bg-neutral-100 rounded-lg transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
-                    </button>
+                    </button> --}}
                     <a href="{{ route('ai-posts.create') }}" class="btn-ai btn-sm" title="AI Generate">
                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
@@ -32,21 +32,26 @@
                 <div class="flex items-center space-x-4">
                     <span class="text-sm font-medium text-neutral-700">Sort by:</span>
                     <div class="flex space-x-1">
-                        <button class="nav-link nav-link-active">Hot</button>
-                        <button class="nav-link">New</button>
-                        <button class="nav-link">Top</button>
+                        <a href="{{ route('dashboard', ['sort' => 'hot']) }}"
+                           class="nav-link {{ ($sort ?? 'hot') === 'hot' ? 'nav-link-active' : '' }}">
+                            Hot
+                        </a>
+                        <a href="{{ route('dashboard', ['sort' => 'new']) }}"
+                           class="nav-link {{ ($sort ?? 'hot') === 'new' ? 'nav-link-active' : '' }}">
+                            New
+                        </a>
+                        <a href="{{ route('dashboard', ['sort' => 'top']) }}"
+                           class="nav-link {{ ($sort ?? 'hot') === 'top' ? 'nav-link-active' : '' }}">
+                            Top
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Recent Posts Feed -->
-        @php
-            $recentPosts = auth()->user()->posts()->with(['likes', 'comments', 'user'])->latest()->take(5)->get();
-        @endphp
-
-        @if($recentPosts->count() > 0)
-            @foreach($recentPosts as $post)
+        @if($posts->count() > 0)
+            @foreach($posts as $post)
                 <div class="card card-elevated hover:shadow-large transition-all duration-300">
                     <div class="card-body">
                         <!-- Post Header -->
@@ -114,6 +119,15 @@
                     </div>
                 </div>
             @endforeach
+
+            <!-- Pagination -->
+            @if($posts->hasPages())
+                <div class="card">
+                    <div class="card-body">
+                        {{ $posts->appends(['sort' => $sort ?? 'hot'])->links() }}
+                    </div>
+                </div>
+            @endif
         @else
             <!-- Empty State -->
             <div class="card text-center">
