@@ -183,10 +183,10 @@ class FormEnhancer {
                 input.classList.remove('ring-2', 'ring-brand-500', 'border-brand-500');
             });
         });
-    }
+    }    setupFormValidation() {
+        // Only apply custom validation to specific forms, not auth forms
+        const forms = document.querySelectorAll('form[data-validate], #post-form, #ai-post-form, #invitation-form');
 
-    setupFormValidation() {
-        const forms = document.querySelectorAll('form');
         forms.forEach(form => {
             form.addEventListener('submit', (e) => {
                 const inputs = form.querySelectorAll('input[required], textarea[required]');
@@ -234,6 +234,29 @@ class FormEnhancer {
     setupButtonLoading() {
         const buttons = document.querySelectorAll('button[type="submit"]');
         buttons.forEach(button => {
+            // Skip auth forms and forms without specific data attributes
+            const form = button.form;
+            if (!form) return;
+
+            // Skip if it's an auth form (login, register, password reset)
+            const isAuthForm = form.id === 'login-form' ||
+                              form.action.includes('/login') ||
+                              form.action.includes('/register') ||
+                              form.action.includes('/password');
+
+            if (isAuthForm) {
+                console.log('Skipping button loading setup for auth form');
+                return;
+            }
+
+            // Only apply to forms that specifically want enhanced loading
+            if (!form.hasAttribute('data-enhanced-loading') &&
+                !form.id.includes('post') &&
+                !form.id.includes('invitation') &&
+                !form.id.includes('ai')) {
+                return;
+            }
+
             button.addEventListener('click', (e) => {
                 if (button.form && button.form.checkValidity()) {
                     this.setButtonLoading(button);
