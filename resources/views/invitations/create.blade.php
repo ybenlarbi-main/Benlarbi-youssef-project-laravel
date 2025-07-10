@@ -117,11 +117,11 @@
                                     </a>
                                     <button type="submit"
                                             class="btn-success"
-                                            onclick="showLoading('Sending invitation...')">
+                                            id="submit-invitation-btn">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
                                         </svg>
-                                        Send Invitation
+                                        <span class="btn-text">Send Invitation</span>
                                     </button>
                                 </div>
                             </form>
@@ -241,23 +241,50 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Form enhancement
-            enhanceForm('invitation-form', {
-                loadingMessage: 'Sending invitation...',
-                showLoading: true
-            });
-
             // User selection enhancement
             const userSelect = document.getElementById('receiver_id');
-            userSelect.addEventListener('change', function() {
-                if (this.value) {
-                    // Add some visual feedback
-                    this.classList.add('border-indigo-500', 'ring-1', 'ring-indigo-500');
-                    setTimeout(() => {
-                        this.classList.remove('border-indigo-500', 'ring-1', 'ring-indigo-500');
-                    }, 2000);
-                }
-            });
+            if (userSelect) {
+                userSelect.addEventListener('change', function() {
+                    if (this.value) {
+                        // Add some visual feedback
+                        this.classList.add('border-indigo-500', 'ring-1', 'ring-indigo-500');
+                        setTimeout(() => {
+                            this.classList.remove('border-indigo-500', 'ring-1', 'ring-indigo-500');
+                        }, 2000);
+                    }
+                });
+            }
+
+            // Simple form submission handling
+            const invitationForm = document.getElementById('invitation-form');
+            const submitBtn = document.getElementById('submit-invitation-btn');
+            const btnText = submitBtn ? submitBtn.querySelector('.btn-text') : null;
+
+            if (invitationForm && submitBtn && btnText) {
+                invitationForm.addEventListener('submit', function(e) {
+                    // Prevent double submission
+                    if (submitBtn.disabled) {
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    // Disable submit button and show loading state
+                    submitBtn.disabled = true;
+                    submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+                    // Update button text
+                    const originalText = btnText.textContent;
+                    btnText.textContent = 'Sending...';
+
+                    // Add loading spinner
+                    const spinner = document.createElement('div');
+                    spinner.className = 'loading-spinner-sm mr-2';
+                    submitBtn.insertBefore(spinner, submitBtn.firstChild);
+
+                    // Form will submit normally, no need to prevent default
+                    console.log('Form submitting...');
+                });
+            }
         });
     </script>
 </x-app-layout>

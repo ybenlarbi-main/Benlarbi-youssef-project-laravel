@@ -184,8 +184,8 @@ class FormEnhancer {
             });
         });
     }    setupFormValidation() {
-        // Only apply custom validation to specific forms, not auth forms
-        const forms = document.querySelectorAll('form[data-validate], #post-form, #ai-post-form, #invitation-form');
+        // Only apply custom validation to specific forms, not auth forms or invitation forms
+        const forms = document.querySelectorAll('form[data-validate], #post-form, #ai-post-form');
 
         forms.forEach(form => {
             form.addEventListener('submit', (e) => {
@@ -244,8 +244,11 @@ class FormEnhancer {
                               form.action.includes('/register') ||
                               form.action.includes('/password');
 
-            if (isAuthForm) {
-                console.log('Skipping button loading setup for auth form');
+            // Skip invitation form as it has custom handling
+            const isInvitationForm = form.id === 'invitation-form';
+
+            if (isAuthForm || isInvitationForm) {
+                console.log('Skipping button loading setup for auth or invitation form');
                 return;
             }
 
